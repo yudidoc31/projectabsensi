@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AbsensiForm = () => {
   const [nama, setNama] = useState("");
@@ -29,16 +31,24 @@ const AbsensiForm = () => {
 
     fetchMahasiswaData(token);
   }, []);
+  
+  const notifySuccess = (message) => {
+    toast.success(message);
+  };
 
   // refactor to hadir
   const handleSubmit = async (e) => {
-    // e.preventDefault();
-    // try {
-    //   const token = localStorage.getItem("token");
-    //   await axios.post("http://localhost:5000/api/attendance", { token, status });
-    // } catch (err) {
-    //   console.error(err.message);
-    // }
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.post("http://localhost:5000/api/attendance", { token, status });
+      if (response.data.error) {
+        toast.error(response.data.error);
+      }
+      notifySuccess(`Selamat, anda telah mengisi absen ${status}`);
+    } catch (err) {
+      console.error(err.message);
+    }
   };
 
   const handleChange = (event) => {
@@ -48,6 +58,8 @@ const AbsensiForm = () => {
   return (
     <div className="container">
       <h2 className="mt-4">Form Absensi Mahasiswa</h2>
+      <ToastContainer />
+      <button onClick={notifySuccess}>NOTIFYYYYY</button>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <h1>Nama: {nama}</h1>

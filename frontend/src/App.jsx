@@ -8,6 +8,8 @@ import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import AbsensiForm from './components/AbsensiForm';
 import MahasiswaList from './components/MahasiswaList';
+import AdminDashboard from './AdminDashboard';
+
 
 const App = () => {
   return (
@@ -21,6 +23,7 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/absensi" element={<AbsensiForm />} />
           <Route path="/mahasiswa" element={<MahasiswaList />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
         </Routes>
       </div>
     </Router>

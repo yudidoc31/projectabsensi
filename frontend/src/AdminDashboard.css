@@ -1,0 +1,44 @@
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .left, .right {
+    width: 40%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f0f0f0;
+  }
+  
+  .center {
+    width: 20%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+  }
+  
+  .table-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
