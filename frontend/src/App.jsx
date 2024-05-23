@@ -9,7 +9,7 @@ import Dashboard from './components/Dashboard';
 import AbsensiForm from './components/AbsensiForm';
 import MahasiswaList from './components/MahasiswaList';
 import AdminDashboard from './AdminDashboard';
-
+import AdminLogin from './components/AdminLogin';
 
 const App = () => {
   return (
@@ -18,6 +18,7 @@ const App = () => {
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
