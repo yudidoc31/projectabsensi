@@ -3,9 +3,9 @@ const router = express.Router();
 const attendanceController = require('../controllers/attendanceController');
 
 // Get all attendance data
-router.get('/attendance', attendanceController.getAllAttendance);
+router.get('', attendanceController.getAllAttendance);
 
 // Create a new attendance record
-router.post('/attendance', attendanceController.createAttendance);
+router.post('', attendanceController.createAttendance);
 
 module.exports = router;

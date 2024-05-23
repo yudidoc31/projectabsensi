@@ -15,11 +15,11 @@ exports.getAllAttendance = async (req, res) => {
 // Create a new attendance record
 exports.createAttendance = async (req, res) => {
   const { mhs_id } = req.body;
-  const tanggal = Date.now();
+  const tanggal = new Date();
   const status = "hadir";
 
   try {
-    const query = 'INSERT INTO kehadiran (mhs_id, tanggal, status) VALUES ($1, $2, $3)';
+    const query = 'INSERT INTO kehadiran (mhs_id, tanggal, status) VALUES ($1, $2, $3) RETURNING *';
     const values = [mhs_id, tanggal, status];
     const { rows } = await pool.query(query, values);
     res.status(201).json(rows[0]);

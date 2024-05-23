@@ -1,11 +1,19 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { Provider } from 'react-redux';
-import {store} from './app/store';
+import ReactDOM from 'react-dom';
 import App from './App';
+// Sesuaikan dengan lokasi file Login.jsx
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
     <App />
-  </Provider>
-);
+  </React.StrictMode>
+)
+// ReactDOM.render(
+//   <Provider store={store}>
+//     <Login />
+//   </Provider>,
+//   document.getElementById('root')
+// );

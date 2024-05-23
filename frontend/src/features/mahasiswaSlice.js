@@ -1,14 +1,17 @@
+// src/features/mahasiswaSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
 const mahasiswaSlice = createSlice({
   name: 'mahasiswa',
   initialState: {
-    // mahasiswa state initial values
+    absensi: []
   },
   reducers: {
-    // mahasiswa slice reducers
+    addAbsensi: (state, action) => {
+      state.absensi.push(action.payload);
+    }
   }
 });
 
-export const { /* mahasiswa slice actions */ } = mahasiswaSlice.actions;
+export const { addAbsensi } = mahasiswaSlice.actions;
 export default mahasiswaSlice.reducer;

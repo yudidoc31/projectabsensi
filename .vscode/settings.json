@@ -1,0 +1,6 @@
+{
+    "git.ignoreLimitWarning": true,
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}
