@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import validator from "validator";
 import { Link, useNavigate } from "react-router-dom";
+import { Button } from 'react-bootstrap';
 
 const Login = () => {
   const [nim, setNIM] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("token") != null) navigate(-1);
+  }, []);
 
   const validateForm = () => {
     // if (!validator.isNIM(nim)) {
@@ -80,6 +85,9 @@ const Login = () => {
                   <button type="button" className="btn btn-info-subtle btn-sm">
                     <Link to="/signup">Signup</Link>
                   </button>
+                  <Link to="/admin-login">
+                    <Button variant="primary" className="mt-3">Login as Admin/Dosen</Button>
+                  </Link>
                 </div>
               </form>
             </div>

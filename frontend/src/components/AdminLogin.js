@@ -1,15 +1,20 @@
 // src/components/AdminLogin.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AdminLogin.css'; // Create this CSS file for styling
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Button } from 'react-bootstrap';
 
 const AdminLogin = () => {
   const [nama, setNama] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("token") != null) navigate(-1);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,6 +60,9 @@ const AdminLogin = () => {
         </div>
         <button type="submit">Login</button>
       </form>
+      <Link to="/login">
+        <Button variant="primary" className="mt-3">Login as Mahasiswa</Button>
+      </Link>
     </div>
   );
 };

@@ -4,14 +4,18 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
 const AbsensiForm = () => {
   const [nama, setNama] = useState("");
   const [prodi, setProdi] = useState("");
   const [angkatan, setAngkatan] = useState("");
   const [status, setStatus] = useState("pagi");
+  const navigate = useNavigate();
 
+  
   useEffect(() => {
+    if (localStorage.getItem("token") == null) navigate("/login");
     const token = localStorage.getItem("token");
 
     const fetchMahasiswaData = async (token) => {
@@ -25,7 +29,8 @@ const AbsensiForm = () => {
         setProdi(response.data.user.prodi);
         setAngkatan(response.data.user.angkatan);
       } catch (error) {
-        alert(error);
+        alert(`You have been signed in as Admin/Dosen. Anda bukan mahasiswa!`);
+        toast.error(error);
       }
     };
 
@@ -51,6 +56,12 @@ const AbsensiForm = () => {
 
   const handleChange = (event) => {
     setStatus(event.target.value);
+  };
+  
+  const handleLogout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
   return (
@@ -95,6 +106,8 @@ const AbsensiForm = () => {
           Hadir
         </button>
       </form>
+      <br />
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };

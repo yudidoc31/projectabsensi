@@ -62,17 +62,18 @@ app.post('/api/admin/login', async (req, res) => {
 
 // Verify Token
 app.get('/api/admin/verify', (req, res) => {
-  const token = req.header('x-auth-token');
-  if (!token) {
-    return res.status(401).json({ error: 'No token, authorization denied' });
-  }
-
   try {
-    const decoded = jwt.verify(token, SECRET_KEY);
-    res.json({ adminId: decoded.adminId });
+    const { token } = req.query;
+    if (!token) {
+      return res.json({ error: 'No token, authorization denied' });
+      // return res.status(401).json({ error: 'No token, authorization denied' });
+    }
+    const decoded = jwt.verify(token, "your-secret-key");
+    res.json({ dosenId: decoded.dosenId });
   } catch (error) {
     console.error('Token verification failed:', error);
-    res.status(400).json({ error: 'Token is not valid' });
+    res.json({ error: 'Token is not valid' });
+    // res.status(400).json({ error: 'Token is not valid' });
   }
 });
 

@@ -11,9 +11,18 @@ const AdminDashboard = () => {
   const [isPagi, setIsPagi] = useState(false);
   const navigate = useNavigate();
 
-  if (localStorage.getItem("token") == null) navigate("/admin-login");
+  useEffect(() => {
+    const checkAdminToken = async () => {
+      const response = await axios.get("http://localhost:5000/api/admin/verify");
+      console.log(response);
+      return response.data.error;
+    }
 
-  useLayoutEffect(() => {
+    if (checkAdminToken()) navigate(-1);
+
+    // if (fetchToken.data.error) navigate(-1);
+
+    if (localStorage.getItem("token") == null) navigate("/admin-login");
     getMahasiswa();
   }, []);
 

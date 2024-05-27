@@ -1,5 +1,5 @@
 import './styles.css';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import validator from 'validator';
 import axios from 'axios';
@@ -12,6 +12,10 @@ const Signup = () => {
   const [angkatan, setAngkatan] = useState("")
   const navigate = useNavigate();
   axios.defaults.withCredentials = true;
+
+  useEffect(() => {
+    if (localStorage.getItem("token") != null) navigate(-1);
+  }, []);
 
 const validateForm = () => {
   if (!validator.isNumeric(NIM) && NIM == "") {
