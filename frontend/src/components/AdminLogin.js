@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import './AdminLogin.css'; // Create this CSS file for styling
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AdminLogin = () => {
   const [nama, setNama] = useState('');
@@ -11,16 +13,25 @@ const AdminLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add login logic here
-    const response = await axios.post("http://localhost:5000/api/admin/login", {nama, password});
-    console.log(response);
-    localStorage.setItem("token", response.data.token);
-    navigate("/admin-dashboard");
+    try {
+      // Add login logic here
+      const response = await axios.post("http://localhost:5000/api/admin/login", {nama, password});
+      console.log(response);
+      if (response.data.error) {
+        toast.error(response.data.error);
+      } else {
+        localStorage.setItem("token", response.data.token);
+        navigate("/admin-dashboard");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div className="login-container">
       <h2>Admin Login</h2>
+      <ToastContainer />
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="nama">Nama:</label>

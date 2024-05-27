@@ -5,7 +5,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Register from './components/Register';
-import Dashboard from './components/Dashboard';
+// import Dashboard from './components/Dashboard';
 import AbsensiForm from './components/AbsensiForm';
 import MahasiswaList from './components/MahasiswaList';
 import AdminDashboard from './AdminDashboard';
@@ -21,7 +21,7 @@ const App = () => {
           <Route path="/admin-login" element={<AdminLogin />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          
           <Route path="/absensi" element={<AbsensiForm />} />
           <Route path="/mahasiswa" element={<MahasiswaList />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />

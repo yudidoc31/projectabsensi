@@ -7,6 +7,7 @@ const pool = require('./database'); // Ensure you have the database setup as per
 const authRoutes = require('./routes/authRoutes');
 const attendanceRoutes = require('./routes/attendanceRoutes');
 const mahasiswaRoute = require('./routes/mahasiswaRoute');
+const adminRoute = require('./routes/adminRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -40,13 +41,15 @@ app.post('/api/admin/login', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM dosen WHERE nama = $1', [nama]);
     if (result.rows.length === 0) {
-      return res.status(400).json({ error: 'Invalid nama' });
+      return res.json({ error: 'Invalid nama' });
+      // return res.status(400).json({ error: 'Invalid nama' });
     }
 
     const dosen = result.rows[0];
     const validPassword = await bcrypt.compare(password, dosen.password);
     if (!validPassword) {
-      return res.status(400).json({ error: 'Invalid password' });
+      return res.json({ error: 'Invalid password' });
+      // return res.status(400).json({ error: 'Invalid password' });
     }
 
     const token = jwt.sign({ dosenId: dosen.id }, SECRET_KEY, { expiresIn: '1h' });
@@ -112,6 +115,7 @@ app.post('/api/admin/test-login', async (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/mahasiswa', mahasiswaRoute);
 app.use('/api/attendance', attendanceRoutes);
+app.use('/api/admin', adminRoute);
 
 // Define the joined-data API endpoint
 app.get('/joined-data', async (req, res) => {

@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from "axios";
 
-const Table = () => {
+const Table = (props) => {
 
   const handleEdit = () => {
-
+    
   }
 
   const handleDelete = async () => {
@@ -22,8 +22,8 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {props.mahasiswas.map((mahasiswa, index) =>
-            <tr>
+          {props.mahasiswas?.map((mahasiswa, index) =>
+            <tr key={index}>
               <td>{mahasiswa.nama}</td>
               <td>
                 <button onClick={handleEdit}>Edit</button>

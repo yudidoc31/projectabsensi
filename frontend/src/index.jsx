@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-// Sesuaikan dengan lokasi file Login.jsx
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
