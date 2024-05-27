@@ -12,17 +12,15 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const checkAdminToken = async () => {
-      const response = await axios.get("http://localhost:5000/api/admin/verify");
-      console.log(response);
-      return response.data.error;
-    }
+    if (localStorage.getItem("token") == null) return navigate("/admin-login");
 
-    if (checkAdminToken()) navigate(-1);
+    // const checkAdminToken = async () => {
+    //   const response = await axios.get("http://localhost:5000/api/admin/verify");
+    //   console.log(response);
+    //   return response.data.error;
+    // }
+    // if (checkAdminToken()) return navigate(-1);
 
-    // if (fetchToken.data.error) navigate(-1);
-
-    if (localStorage.getItem("token") == null) navigate("/admin-login");
     getMahasiswa();
   }, []);
 
@@ -49,10 +47,10 @@ const AdminDashboard = () => {
   return (
     <div className="dashboard-container">
       <div className="left">
-      <button onClick={handleLogout}>Logout</button>
-        {/* <Table isHadir={false} mahasiswa={[]} /> */}
+        <Table isHadir={false} mahasiswas={ isPagi ? (mahasiswaSummary.pagi?.mahasiswaTidakHadirList) : (mahasiswaSummary.sore?.mahasiswaTidakHadirList)} />
       </div>
       <div className="center">
+        <button onClick={handleLogout}>Logout</button>
         <Switch
           checked={isPagi}
           onChange={toggle}

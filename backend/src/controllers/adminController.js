@@ -25,14 +25,17 @@ exports.getMahasiswaSummary = async (req, res) => {
         console.log("CHECK POINTOO 1 pagiii", summary.kehadiranList);
         let hadirList = summary.kehadiranList.filter((kehadiran) => kehadiran.status === "pagi");
         let mahasiswaHadirList = [];
-        for (let index in hadirList) {
-            const input = summary.mahasiswaList.find((mahasiswa) => mahasiswa.id == hadirList[index].mhs_id);
-            mahasiswaHadirList.push(input);
+        let mahasiswaTidakHadirList = [];
+        for (let index in summary.mahasiswaList) {
+            const input = hadirList.find((kehadiran) => kehadiran.mhs_id == summary.mahasiswaList[index].id);
+            if (input) mahasiswaHadirList.push(summary.mahasiswaList[index]);
+            else mahasiswaTidakHadirList.push(summary.mahasiswaList[index]);
         }
         console.log("CHECK POINTOO 2 pagiii", mahasiswaHadirList);
         summary.pagi = {
             hadirList,
             mahasiswaHadirList,
+            mahasiswaTidakHadirList,
             countHadir:  hadirList.length,
             countTidakHadir: summary.mahasiswaCount - hadirList.length,
         }
@@ -42,14 +45,17 @@ exports.getMahasiswaSummary = async (req, res) => {
         console.log("CHECK POINTOO 1 soreee", summary.kehadiranList);
         hadirList = summary.kehadiranList.filter((kehadiran) => kehadiran.status === "sore");
         mahasiswaHadirList = [];
-        for (let index in hadirList) {
-            const input = summary.mahasiswaList.find((mahasiswa) => mahasiswa.id == hadirList[index].mhs_id);
-            mahasiswaHadirList.push(input);
+        mahasiswaTidakHadirList = [];
+        for (let index in summary.mahasiswaList) {
+            const input = hadirList.find((kehadiran) => kehadiran.mhs_id == summary.mahasiswaList[index].id);
+            if (input) mahasiswaHadirList.push(summary.mahasiswaList[index]);
+            else mahasiswaTidakHadirList.push(summary.mahasiswaList[index]);
         }
         console.log("CHECK POINTOO 2 soreee", mahasiswaHadirList);
         summary.sore = {
             hadirList,
             mahasiswaHadirList,
+            mahasiswaTidakHadirList,
             countHadir:  hadirList.length,
             countTidakHadir: summary.mahasiswaCount - hadirList.length,
         }
